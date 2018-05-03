@@ -31,17 +31,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baU-2T-XdK">
                                 <rect key="frame" x="123" y="168" width="103" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="录音"/>
+                                <state key="normal" title="开始录音"/>
                                 <connections>
                                     <action selector="actionRecord:" destination="BYZ-38-t0r" eventType="touchUpInside" id="irB-uH-EQ6"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMg-cH-qiL">
-                                <rect key="frame" x="118" y="240" width="138" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="暂停"/>
-                                <connections>
-                                    <action selector="actionPause:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zKO-Ts-vbU"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wa5-p0-EJT">
@@ -50,6 +42,22 @@
                                 <state key="normal" title="语音合成"/>
                                 <connections>
                                     <action selector="audioComposition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zL7-ar-2fa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYw-Rr-OUE">
+                                <rect key="frame" x="127" y="76" width="99" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="后台播放"/>
+                                <connections>
+                                    <action selector="actionPlaybackground:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tAo-KX-ubr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMg-cH-qiL">
+                                <rect key="frame" x="107" y="232" width="138" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="暂停录音"/>
+                                <connections>
+                                    <action selector="actionPause:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zKO-Ts-vbU"/>
                                 </connections>
                             </button>
                         </subviews>
