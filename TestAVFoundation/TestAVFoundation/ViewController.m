@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface ViewController ()
+@interface ViewController ()<AVAudioPlayerDelegate>
 {
     NSURL *_url;
 }
@@ -31,8 +31,10 @@
     }else{
         NSLog(@"注册录音成功!");
     }
-    [self setPlayingInfo];
+    [MPNowPlayingInfoCenter defaultCenter].nowPlayingInfo = nil;//必须先调用一遍，要不锁屏界面的时候显示不出来。这里设置为空，表示还没有歌曲播放
+    
 }
+
 - (void)viewDidAppear:(BOOL)animated {
     //    接受远程控制 这句如果不调用的话，锁屏不会显示出来
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
@@ -48,7 +50,8 @@
     
     NSDictionary *dic = @{MPMediaItemPropertyTitle:@"时间煮雨",
                           MPMediaItemPropertyArtist:@"吴亦凡",
-                          MPMediaItemPropertyArtwork:artWork
+                          MPMediaItemPropertyArtwork:artWork,
+                          MPMediaItemPropertyPlaybackDuration:@(3)
                           };
     [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:dic];
     
@@ -77,6 +80,7 @@
         NSLog(@"播放失败%@",error);
     }else{
         [self.player play];
+        [self setPlayingInfo];
     }
 }
 //录音、合成之后等播放
@@ -84,6 +88,7 @@
     NSURL *url = _url;
     NSError *error = nil;
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];//播放声音
+    self.player.delegate = self;
     if (error) {
         NSLog(@"播放失败%@",error);
     }else{
@@ -94,25 +99,31 @@
 //暂停录音
 - (IBAction)actionPause:(id)sender {
     if ([self.recorder isRecording]) {
-        [self.recorder pause];
+//        [self.recorder pause];//pause之后，不会把所有的录音写入文件中，并且可以通过recorde继续录制
+        [self.recorder stop];//stop之后会把所有的录音都写到文件中。文件录制结束后一定要stop一下，否则有可能播放失败的
     }
 }
 //开始录音
 - (IBAction)actionRecord:(id)sender {
- 
+    _url = [self pathForMedia];
     NSMutableDictionary *dicM=[NSMutableDictionary dictionary];
     
     //设置录音格式
     
     [dicM setObject:@(kAudioFormatMPEG4AAC)forKey:AVFormatIDKey];
     
-    //设置录音采样率，8000是电话采样率，对于一般录音已经够了
-    
+    //设置录音采样率，8000是电话采样率，对于一般录音已经够了，不过为了保证声音不失真，采样频率应该在40kHz左右
+//    8000 Hz - 电话所用采样率， 对于人的说话已经足够
+//    11025 Hz - 电话所用采样率
+//    22050 Hz - 无线电广播所用采样率
+//    32000 Hz - miniDV 数码视频 camcorder、DAT (LP mode)所用采样率
+//    44100 Hz - 音频 CD, 也常用于 MPEG-1 音频（VCD，SVCD，MP3）所用采样率
+
     [dicM setObject:@(8000)forKey:AVSampleRateKey];
     
-    //设置通道,这里采用双声道
+    //设置录制通道
     
-    [dicM setObject:@(2)forKey:AVNumberOfChannelsKey];
+    [dicM setObject:@(1)forKey:AVNumberOfChannelsKey];
     
     //每个采样点位数,分为8、16、24、32
     
@@ -121,17 +132,20 @@
     //是否使用浮点数采样
     
     [dicM setObject:@(YES)forKey:AVLinearPCMIsFloatKey];
+    [dicM setObject:@(AVAudioQualityMedium) forKey:AVEncoderAudioQualityKey];//设置音频质量
     NSError *error = nil;
-    self.recorder = [[AVAudioRecorder alloc] initWithURL:[self pathForMedia] settings:dicM error:&error];
+    
+    self.recorder = [[AVAudioRecorder alloc] initWithURL:_url settings:dicM error:&error];
     if (error) {
         NSLog(@"%@",error.description);
     }
-    if ([self.recorder prepareToRecord]) {
+    if ([self.recorder prepareToRecord]) {//创建文件并且准备开始录音
         NSLog(@"准备好录音");
+         [self.recorder record];//开始录音或继续录音，(暂停之后可以继续录音)
     }else{
         NSLog(@"失败");
     }
-    [self.recorder record];
+   
 }
 - (NSURL *)pathForCompostion{
     NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
