@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4211763E209BEDA10022884E /* test.aac in Resources */ = {isa = PBXBuildFile; fileRef = 4211763D209BEDA00022884E /* test.aac */; };
 		423ADBE92099809D008A3846 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 423ADBE82099809D008A3846 /* AppDelegate.m */; };
 		423ADBEC2099809D008A3846 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 423ADBEB2099809D008A3846 /* ViewController.m */; };
 		423ADBEF2099809E008A3846 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423ADBED2099809E008A3846 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4211763D209BEDA00022884E /* test.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.aac; sourceTree = "<group>"; };
 		423ADBE42099809D008A3846 /* TestAVFoundation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestAVFoundation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		423ADBE72099809D008A3846 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		423ADBE82099809D008A3846 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				423ADC012099A9EE008A3846 /* 男声.mp3 */,
 				423ADBFD2099A886008A3846 /* 女声.mp3 */,
 				4274FAE6209AA3A300D76153 /* 宿命者.mp3 */,
+				4211763D209BEDA00022884E /* test.aac */,
 				4274FAEA209AAFA200D76153 /* empty.png */,
 				423ADBE72099809D008A3846 /* AppDelegate.h */,
 				423ADBE82099809D008A3846 /* AppDelegate.m */,
@@ -144,6 +147,7 @@
 				4274FAE7209AA3A300D76153 /* 宿命者.mp3 in Resources */,
 				4274FAEB209AAFA200D76153 /* empty.png in Resources */,
 				423ADBF42099809E008A3846 /* LaunchScreen.storyboard in Resources */,
+				4211763E209BEDA10022884E /* test.aac in Resources */,
 				423ADBF12099809E008A3846 /* Assets.xcassets in Resources */,
 				423ADBEF2099809E008A3846 /* Main.storyboard in Resources */,
 				423ADBFF2099A886008A3846 /* 女声.mp3 in Resources */,

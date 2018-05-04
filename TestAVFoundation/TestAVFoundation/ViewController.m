@@ -121,9 +121,9 @@
 
     [dicM setObject:@(8000)forKey:AVSampleRateKey];
     
-    //设置录制通道
+    //设置录制通道 单频道和双频道
     
-    [dicM setObject:@(1)forKey:AVNumberOfChannelsKey];
+    [dicM setObject:@(2)forKey:AVNumberOfChannelsKey];
     
     //每个采样点位数,分为8、16、24、32
     
@@ -165,13 +165,19 @@
     
     AVMutableComposition *composition = [AVMutableComposition composition];
     AVMutableCompositionTrack  *compositionTrack = [composition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:0];
+    
+//    AVMutableCompositionTrack  *compositionTrack2 = [composition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:1];//这里可以再生成一个mutableCoposition，这样可以实现给一段声音添加一个背景音乐
+    
     NSError *error1 = nil;
     NSError *error2 = nil;
+    NSError *error3 = nil;
     float timescale1 = asset1.duration.timescale;
     float timescale2 = asset2.duration.timescale;
     
     [compositionTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero,asset1.duration) ofTrack:track1 atTime:kCMTimeZero error:&error1];
     [compositionTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero,asset2.duration) ofTrack:track2 atTime:asset1.duration error:&error2];
+
+//    [compositionTrack2 insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset2.duration) ofTrack:track2 atTime:kCMTimeZero error:&error3];
     
 //    [compositionTrack scaleTimeRange:CMTimeRangeMake(kCMTimeZero,asset1.duration) toDuration:CMTimeMake(asset1.duration.value, timescale1*3)];//通过此方法可以实现语音或视频的加速和减速
     AVAssetExportSession *exportSessio = [AVAssetExportSession exportSessionWithAsset:composition presetName:AVAssetExportPresetAppleM4A];
