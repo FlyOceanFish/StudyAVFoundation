@@ -18,6 +18,8 @@
 		423ADC022099A9EE008A3846 /* 男声.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 423ADC012099A9EE008A3846 /* 男声.mp3 */; };
 		4274FAE7209AA3A300D76153 /* 宿命者.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4274FAE6209AA3A300D76153 /* 宿命者.mp3 */; };
 		4274FAEB209AAFA200D76153 /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 4274FAEA209AAFA200D76153 /* empty.png */; };
+		42A5D14C20A0197F00566691 /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5D14B20A0197F00566691 /* VideoViewController.m */; };
+		42A5D14E20A0225A00566691 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 42A5D14D20A0225A00566691 /* video.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,9 @@
 		423ADC012099A9EE008A3846 /* 男声.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "男声.mp3"; sourceTree = "<group>"; };
 		4274FAE6209AA3A300D76153 /* 宿命者.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "宿命者.mp3"; sourceTree = "<group>"; };
 		4274FAEA209AAFA200D76153 /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
+		42A5D14A20A0197F00566691 /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
+		42A5D14B20A0197F00566691 /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
+		42A5D14D20A0225A00566691 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,10 +78,13 @@
 				4274FAE6209AA3A300D76153 /* 宿命者.mp3 */,
 				4211763D209BEDA00022884E /* test.aac */,
 				4274FAEA209AAFA200D76153 /* empty.png */,
+				42A5D14D20A0225A00566691 /* video.mp4 */,
 				423ADBE72099809D008A3846 /* AppDelegate.h */,
 				423ADBE82099809D008A3846 /* AppDelegate.m */,
 				423ADBEA2099809D008A3846 /* ViewController.h */,
 				423ADBEB2099809D008A3846 /* ViewController.m */,
+				42A5D14A20A0197F00566691 /* VideoViewController.h */,
+				42A5D14B20A0197F00566691 /* VideoViewController.m */,
 				423ADBED2099809E008A3846 /* Main.storyboard */,
 				423ADBF02099809E008A3846 /* Assets.xcassets */,
 				423ADBF22099809E008A3846 /* LaunchScreen.storyboard */,
@@ -148,6 +156,7 @@
 				4274FAEB209AAFA200D76153 /* empty.png in Resources */,
 				423ADBF42099809E008A3846 /* LaunchScreen.storyboard in Resources */,
 				4211763E209BEDA10022884E /* test.aac in Resources */,
+				42A5D14E20A0225A00566691 /* video.mp4 in Resources */,
 				423ADBF12099809E008A3846 /* Assets.xcassets in Resources */,
 				423ADBEF2099809E008A3846 /* Main.storyboard in Resources */,
 				423ADBFF2099A886008A3846 /* 女声.mp3 in Resources */,
@@ -164,6 +173,7 @@
 			files = (
 				423ADBEC2099809D008A3846 /* ViewController.m in Sources */,
 				423ADBF72099809E008A3846 /* main.m in Sources */,
+				42A5D14C20A0197F00566691 /* VideoViewController.m in Sources */,
 				423ADBE92099809D008A3846 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
