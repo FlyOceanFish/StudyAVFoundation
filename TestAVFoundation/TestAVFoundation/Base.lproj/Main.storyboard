@@ -135,18 +135,32 @@
                                     <constraint firstItem="DcV-SH-7Bs" firstAttribute="leading" secondItem="LWf-DC-VZ6" secondAttribute="trailing" constant="8" id="vaK-LE-0pK"/>
                                 </constraints>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bgK-BI-F7H">
+                                <rect key="frame" x="246" y="276" width="121" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="121" id="Qe1-lt-KIx"/>
+                                    <constraint firstAttribute="height" constant="28" id="iZC-p9-otS"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="X1"/>
+                                    <segment title="X2"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="bgK-BI-F7H" secondAttribute="trailing" constant="8" id="5ze-PK-tnC"/>
                             <constraint firstAttribute="trailing" secondItem="YB1-IW-pNv" secondAttribute="trailing" id="QRD-As-bh8"/>
                             <constraint firstItem="YB1-IW-pNv" firstAttribute="leading" secondItem="lrD-Om-Rj9" secondAttribute="leading" id="i6g-Sp-0xa"/>
                             <constraint firstItem="YB1-IW-pNv" firstAttribute="top" secondItem="KN0-KU-e8a" secondAttribute="bottom" constant="260" id="kiu-la-a73"/>
+                            <constraint firstItem="bgK-BI-F7H" firstAttribute="top" secondItem="YB1-IW-pNv" secondAttribute="bottom" constant="2" id="n0H-QM-aQL"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="mLabeStart" destination="HUj-gC-Ffg" id="A2o-n9-GRc"/>
                         <outlet property="mLabelTimeLeft" destination="DcV-SH-7Bs" id="cj2-7z-mSw"/>
+                        <outlet property="mSegmentedControl" destination="bgK-BI-F7H" id="CNH-bL-6v5"/>
                         <outlet property="mViewProgress" destination="YB1-IW-pNv" id="Gbg-gF-b8Q"/>
                         <outlet property="mlider" destination="LWf-DC-VZ6" id="B2p-CS-IT5"/>
                         <outlet property="mprogressView" destination="FwW-VI-eQh" id="Nco-yS-Xqu"/>

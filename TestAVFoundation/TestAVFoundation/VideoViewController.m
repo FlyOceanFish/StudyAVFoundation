@@ -6,6 +6,11 @@
 //  Copyright © 2018年 FlyOceanFish. All rights reserved.
 //
 
+
+/*
+   AVQueuePlayer可以很好连续播放两个视频，播放A的时候会提前预加载B，甚至C，但是AVQueuePlayer不是播放列表。可以实现循环播放功能
+ AVPlayerLooper 实现循环播放功能代码更加简洁
+ */
 #import "VideoViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
@@ -27,6 +32,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *mViewProgress;
 @property (strong, nonatomic) UIActivityIndicatorView *indicator;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *mSegmentedControl;
 @end
 
 @implementation VideoViewController
@@ -43,15 +49,21 @@
 //    NSURL *url = [NSURL fileURLWithPath:path];
 
 //    NSURL *url = [NSURL URLWithString:@"http://static.tripbe.com/videofiles/20121214/9533522808.f4v.mp4"];
-    NSURL *url = [NSURL URLWithString:@"http://192.168.9.196:8080/videos/video.mp4"];
+//    NSURL *url = [NSURL URLWithString:@"http://192.168.9.196:8080/videos/video.mp4"];
+    NSURL *url = [NSURL URLWithString:@"http://192.168.9.197:8080/videos/videos.mp4"];
     _playItem = [[AVPlayerItem alloc] initWithURL:url];
-    
-//    AVAsset *asset = [AVAsset assetWithURL:url];
+//    _playItem.preferredForwardBufferDuration = 5;此属性设置缓存了多少秒就开始播放，不过要与AVPlayer的automaticallyWaitsToMinimizeStalling = false结合使用才行
+
+//    AVAsset *asset = [AVAsset assetWithURL:url];//实际是创建了AVURLAsset
 //    AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
 //    self.player = [AVPlayer playerWithPlayerItem:item];//此实例方法要配合以上两句实例才行，即通过AVAsset
-    self.player = [[AVPlayer alloc] initWithPlayerItem:_playItem];
-
+    
+//    self.player = [[AVPlayer alloc] initWithPlayerItem:_playItem];//这是第二种方式
+    
+    self.player = [[AVPlayer alloc] init];//第三种方式苹果推荐的方式，先实例化一个空的AVPlayerLayer创建之后，通过replaceCurrentItemWithPlayerItem设置。最好的实践是在AVPlayer调用play之后调用replaceCurrentItemWithPlayerItem
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    [self.player replaceCurrentItemWithPlayerItem:_playItem];
+    
     self.playerLayer.frame = CGRectMake(0, 0,CGRectGetWidth(self.view.bounds), 260);
     self.playerLayer.backgroundColor = [UIColor redColor].CGColor;
     self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
@@ -64,7 +76,6 @@
     [_playItem addObserver:self forKeyPath:@"playbackBufferEmpty" options:NSKeyValueObservingOptionNew context:nil];
 //    用于监听缓存足够播放的状态
     [_playItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
-
     __weak typeof(self) this = self;
     [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 10) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
         float currentTime = CMTimeGetSeconds(time);
@@ -74,7 +85,6 @@
     }];
 
 
-    
     _btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_btn setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
     [_btn setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateSelected];
@@ -87,8 +97,18 @@
     self.indicator.color = [UIColor colorWithRed:23/255.0 green:130/255.0 blue:210/255.9 alpha:1];
     self.indicator.hidden = YES;
     [self.view addSubview:self.indicator];
+    
+    if ([_playItem canPlayFastForward]) {//只有是true的时候，才能支持2倍速度以上
+        [self.mSegmentedControl insertSegmentWithTitle:@"X3" atIndex:2 animated:NO];
+        [self.mSegmentedControl insertSegmentWithTitle:@"X4" atIndex:3 animated:NO];
+    }
+    [self.mSegmentedControl addTarget:self action:@selector(segmentedIndexChanged:) forControlEvents:UIControlEventValueChanged];
+//    AVPlayerTimeControlStatusPaused, 暂停
+//    AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate,等待播放
+//    AVPlayerTimeControlStatusPlaying 播放
+//    _player.timeControlStatus
 }
-
+#pragma mark - Action
 - (void)actionPlayPause:(UIButton *)sender {
     if (sender.selected) {
         [self.player pause];
@@ -98,7 +118,10 @@
     }
     sender.selected = !sender.selected;
 }
-
+- (void)segmentedIndexChanged:(UISegmentedControl *)sender{
+    self.player.rate = sender.selectedSegmentIndex+1;
+}
+#pragma mark - Observe
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:@"status"]) {
         AVPlayerItem *item = (AVPlayerItem *)object;
@@ -172,6 +195,7 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     NSLog(@"begin");
 }
+#pragma mark - Private
 - (void)animalHide{
     [UIView animateWithDuration:1 animations:^{
         _btn.alpha = 0;
@@ -208,6 +232,13 @@
 }
 */
 -(void)dealloc{
+//    需要释放一下资源否则会奔溃
+    [_playItem removeObserver:self forKeyPath:@"status"];
+    [_playItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
+    [_playItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
+    [_playItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
+    [_player.currentItem cancelPendingSeeks];
+    [_player.currentItem.asset cancelLoading];
     NSLog(@"顺利销毁");
 }
 @end
