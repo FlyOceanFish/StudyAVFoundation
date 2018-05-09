@@ -90,8 +90,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YB1-IW-pNv">
                                 <rect key="frame" x="0.0" y="260" width="375" height="14"/>
                                 <subviews>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FwW-VI-eQh">
+                                        <rect key="frame" x="57" y="7" width="243" height="2"/>
+                                        <color key="progressTintColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </progressView>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="LWf-DC-VZ6">
                                         <rect key="frame" x="55" y="0.0" width="247" height="15"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="maximumTrackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUj-gC-Ffg">
                                         <rect key="frame" x="0.0" y="0.0" width="49" height="14"/>
@@ -116,8 +122,11 @@
                                     <constraint firstAttribute="bottom" secondItem="LWf-DC-VZ6" secondAttribute="bottom" id="2ID-E3-gt2"/>
                                     <constraint firstAttribute="bottom" secondItem="DcV-SH-7Bs" secondAttribute="bottom" id="2v2-sU-5cP"/>
                                     <constraint firstAttribute="bottom" secondItem="HUj-gC-Ffg" secondAttribute="bottom" id="6rD-PO-IcU"/>
+                                    <constraint firstItem="FwW-VI-eQh" firstAttribute="trailing" secondItem="LWf-DC-VZ6" secondAttribute="trailing" id="BDE-4a-xHN"/>
                                     <constraint firstItem="LWf-DC-VZ6" firstAttribute="leading" secondItem="HUj-gC-Ffg" secondAttribute="trailing" constant="8" id="IS9-BK-6dd"/>
+                                    <constraint firstItem="FwW-VI-eQh" firstAttribute="leading" secondItem="LWf-DC-VZ6" secondAttribute="leading" id="JdE-hf-VZK"/>
                                     <constraint firstItem="DcV-SH-7Bs" firstAttribute="top" secondItem="YB1-IW-pNv" secondAttribute="top" id="NUt-qh-k72"/>
+                                    <constraint firstItem="FwW-VI-eQh" firstAttribute="top" secondItem="YB1-IW-pNv" secondAttribute="top" constant="7" id="OBh-tv-rRm"/>
                                     <constraint firstItem="HUj-gC-Ffg" firstAttribute="leading" secondItem="YB1-IW-pNv" secondAttribute="leading" id="Tdp-OY-DhP"/>
                                     <constraint firstItem="HUj-gC-Ffg" firstAttribute="top" secondItem="YB1-IW-pNv" secondAttribute="top" id="Upx-3b-YSu"/>
                                     <constraint firstAttribute="height" constant="14" id="dWr-iE-oVm"/>
@@ -140,6 +149,7 @@
                         <outlet property="mLabelTimeLeft" destination="DcV-SH-7Bs" id="cj2-7z-mSw"/>
                         <outlet property="mViewProgress" destination="YB1-IW-pNv" id="Gbg-gF-b8Q"/>
                         <outlet property="mlider" destination="LWf-DC-VZ6" id="B2p-CS-IT5"/>
+                        <outlet property="mprogressView" destination="FwW-VI-eQh" id="Nco-yS-Xqu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oGO-zT-qjI" userLabel="First Responder" sceneMemberID="firstResponder"/>

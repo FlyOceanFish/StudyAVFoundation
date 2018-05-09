@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *mLabeStart;
 @property (weak, nonatomic) IBOutlet UILabel *mLabelTimeLeft;
 @property (weak, nonatomic) IBOutlet UISlider *mlider;
+@property (weak, nonatomic) IBOutlet UIProgressView *mprogressView;
+
 @property (weak, nonatomic) IBOutlet UIView *mViewProgress;
 @property (strong, nonatomic) UIActivityIndicatorView *indicator;
 @end
@@ -137,6 +139,7 @@
         float startSeconds = CMTimeGetSeconds(timeRange.start);
         float durationSeconds = CMTimeGetSeconds(timeRange.duration);
         NSTimeInterval totalBuffer = startSeconds + durationSeconds;//缓冲总长度
+        self.mprogressView.progress = totalBuffer/CMTimeGetSeconds(_duration);
         NSLog(@"当前缓冲时间：%f",totalBuffer);
     }else if ([keyPath isEqualToString:@"playbackBufferEmpty"]){
         NSLog(@"缓存不够，不能播放！");
