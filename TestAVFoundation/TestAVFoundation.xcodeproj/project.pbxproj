@@ -21,6 +21,8 @@
 		42A5D14C20A0197F00566691 /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5D14B20A0197F00566691 /* VideoViewController.m */; };
 		42A5D14E20A0225A00566691 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 42A5D14D20A0225A00566691 /* video.mp4 */; };
 		42A5D15220A130EA00566691 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 42A5D15120A130EA00566691 /* video2.mp4 */; };
+		42A5D15820A3DE0E00566691 /* FOFMoviePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5D15720A3DE0E00566691 /* FOFMoviePlayer.m */; };
+		42A5D15C20A3E23800566691 /* TestMoviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5D15A20A3E23800566691 /* TestMoviePlayerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,10 @@
 		42A5D14B20A0197F00566691 /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
 		42A5D14D20A0225A00566691 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 		42A5D15120A130EA00566691 /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
+		42A5D15620A3DE0E00566691 /* FOFMoviePlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FOFMoviePlayer.h; sourceTree = "<group>"; };
+		42A5D15720A3DE0E00566691 /* FOFMoviePlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FOFMoviePlayer.m; sourceTree = "<group>"; };
+		42A5D15920A3E23800566691 /* TestMoviePlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestMoviePlayerViewController.h; sourceTree = "<group>"; };
+		42A5D15A20A3E23800566691 /* TestMoviePlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestMoviePlayerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +94,10 @@
 				423ADBEB2099809D008A3846 /* ViewController.m */,
 				42A5D14A20A0197F00566691 /* VideoViewController.h */,
 				42A5D14B20A0197F00566691 /* VideoViewController.m */,
+				42A5D15920A3E23800566691 /* TestMoviePlayerViewController.h */,
+				42A5D15A20A3E23800566691 /* TestMoviePlayerViewController.m */,
+				42A5D15620A3DE0E00566691 /* FOFMoviePlayer.h */,
+				42A5D15720A3DE0E00566691 /* FOFMoviePlayer.m */,
 				423ADBED2099809E008A3846 /* Main.storyboard */,
 				423ADBF02099809E008A3846 /* Assets.xcassets */,
 				423ADBF22099809E008A3846 /* LaunchScreen.storyboard */,
@@ -177,6 +187,8 @@
 			files = (
 				423ADBEC2099809D008A3846 /* ViewController.m in Sources */,
 				423ADBF72099809E008A3846 /* main.m in Sources */,
+				42A5D15C20A3E23800566691 /* TestMoviePlayerViewController.m in Sources */,
+				42A5D15820A3DE0E00566691 /* FOFMoviePlayer.m in Sources */,
 				42A5D14C20A0197F00566691 /* VideoViewController.m in Sources */,
 				423ADBE92099809D008A3846 /* AppDelegate.m in Sources */,
 			);
@@ -312,16 +324,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EC23THMNG7;
 				INFOPLIST_FILE = TestAVFoundation/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fof.TestAVFoundation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fof.TestAVFoundation2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -329,16 +342,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EC23THMNG7;
 				INFOPLIST_FILE = TestAVFoundation/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fof.TestAVFoundation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fof.TestAVFoundation2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

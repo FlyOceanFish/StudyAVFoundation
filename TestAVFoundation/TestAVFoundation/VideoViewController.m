@@ -19,6 +19,7 @@
     
     UIButton *_btn;
     AVPlayerItem *_playItem;
+    AVPlayerLooper *_playerLooper;
 }
 @property(nonatomic,strong)AVPlayer *player;
 @property(nonatomic,strong)AVPlayerLayer *playerLayer;

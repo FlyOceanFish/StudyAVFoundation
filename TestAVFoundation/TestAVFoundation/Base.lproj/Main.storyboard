@@ -60,11 +60,19 @@
                                     <action selector="actionPlaybackground:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tAo-KX-ubr"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bpf-Id-X9a">
+                                <rect key="frame" x="246" y="92" width="123" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="测试视频播放控件"/>
+                                <connections>
+                                    <segue destination="gPO-r1-utG" kind="show" id="sLc-xB-YUf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="音频" id="n0n-km-zbE">
-                        <barButtonItem key="rightBarButtonItem" title="视频" id="uBe-oz-yeZ">
+                        <barButtonItem key="rightBarButtonItem" title="视频学习" id="uBe-oz-yeZ">
                             <connections>
                                 <segue destination="mvI-MR-wsu" kind="show" id="18P-x5-YlI"/>
                             </connections>
@@ -168,7 +176,43 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oGO-zT-qjI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1853.5999999999999" y="133.5832083958021"/>
+            <point key="canvasLocation" x="1950" y="817"/>
+        </scene>
+        <!--Test Movie Player View Controller-->
+        <scene sceneID="1Xl-zu-gFD">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="gPO-r1-utG" customClass="TestMoviePlayerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="axf-g7-NWR"/>
+                        <viewControllerLayoutGuide type="bottom" id="LIf-W9-PUV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hMe-Bn-ZCr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Bh-YC-0LG" customClass="FOFMoviePlayer">
+                                <rect key="frame" x="0.0" y="10" width="375" height="260"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="260" id="erk-Rl-pd3"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4Bh-YC-0LG" firstAttribute="top" secondItem="axf-g7-NWR" secondAttribute="bottom" constant="10" id="4gQ-Rk-74R"/>
+                            <constraint firstItem="4Bh-YC-0LG" firstAttribute="leading" secondItem="hMe-Bn-ZCr" secondAttribute="leading" id="dbT-Wm-mxV"/>
+                            <constraint firstAttribute="trailing" secondItem="4Bh-YC-0LG" secondAttribute="trailing" id="kKN-3u-k94"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <connections>
+                        <outlet property="mMoviePlayer" destination="4Bh-YC-0LG" id="Qx3-Ei-N8S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ViG-Ec-oN3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2016.8" y="-9.4452773613193415"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6Y3-u2-ONU">
