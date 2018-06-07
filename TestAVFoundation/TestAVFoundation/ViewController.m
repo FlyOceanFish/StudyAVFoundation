@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import "ConvertUtil.h"
 
 @interface ViewController ()<AVAudioPlayerDelegate>
 {
@@ -22,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     NSError *error = nil;
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];//支持后台播放和录音
     [[AVAudioSession sharedInstance] setActive:YES error:nil];//这两行代码在录音和播放的时候要写，否则会失败
@@ -57,7 +58,7 @@
     
 }
 - (NSURL *)pathForMedia{
-    return [self pathForName:@"test.aac"];
+    return [self pathForName:@"test.caf"];
 }
 - (NSURL *)pathForName:(NSString *)name{
     NSString *docum = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
@@ -110,7 +111,7 @@
     
     //设置录音格式
     
-    [dicM setObject:@(kAudioFormatMPEG4AAC)forKey:AVFormatIDKey];
+    [dicM setObject:@(kAudioFormatLinearPCM)forKey:AVFormatIDKey];
     
     //设置录音采样率，8000是电话采样率，对于一般录音已经够了，不过为了保证声音不失真，采样频率应该在40kHz左右
 //    8000 Hz - 电话所用采样率， 对于人的说话已经足够
@@ -129,9 +130,9 @@
     
     [dicM setObject:@(16)forKey:AVLinearPCMBitDepthKey];
     
-    //是否使用浮点数采样
+    //是否使用浮点数采样 转换成MP3的时候不能使用该属性
     
-    [dicM setObject:@(YES)forKey:AVLinearPCMIsFloatKey];
+//    [dicM setObject:@(YES)forKey:AVLinearPCMIsFloatKey];
     [dicM setObject:@(AVAudioQualityMedium) forKey:AVEncoderAudioQualityKey];//设置音频质量
     NSError *error = nil;
     
@@ -192,6 +193,9 @@
           NSLog(@"导出失败");
         }
     }];
+}
+- (IBAction)actionConvert:(UIButton *)sender {
+    [ConvertUtil cafFile:_url.absoluteString toMp3File:[self pathForName:@"test.mp3"].absoluteString];
 }
 
 //锁屏之后屏幕上显示的暂停、上一曲、下一曲操作

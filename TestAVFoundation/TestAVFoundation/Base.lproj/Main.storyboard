@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -66,6 +67,14 @@
                                 <state key="normal" title="测试视频播放控件"/>
                                 <connections>
                                     <segue destination="gPO-r1-utG" kind="show" id="sLc-xB-YUf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qYF-Vr-cQ3">
+                                <rect key="frame" x="144" y="392" width="86" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="语音转码"/>
+                                <connections>
+                                    <action selector="actionConvert:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zyU-EZ-HY3"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4211763E209BEDA10022884E /* test.aac in Resources */ = {isa = PBXBuildFile; fileRef = 4211763D209BEDA00022884E /* test.aac */; };
+		422E489920C91EB700455D77 /* ConvertUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 422E489820C91EB700455D77 /* ConvertUtil.m */; };
+		422E489D20C91EF400455D77 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 422E489C20C91EF400455D77 /* libmp3lame.a */; };
 		423ADBE92099809D008A3846 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 423ADBE82099809D008A3846 /* AppDelegate.m */; };
 		423ADBEC2099809D008A3846 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 423ADBEB2099809D008A3846 /* ViewController.m */; };
 		423ADBEF2099809E008A3846 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423ADBED2099809E008A3846 /* Main.storyboard */; };
@@ -27,6 +29,10 @@
 
 /* Begin PBXFileReference section */
 		4211763D209BEDA00022884E /* test.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.aac; sourceTree = "<group>"; };
+		422E489720C91EB700455D77 /* ConvertUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConvertUtil.h; sourceTree = "<group>"; };
+		422E489820C91EB700455D77 /* ConvertUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConvertUtil.m; sourceTree = "<group>"; };
+		422E489B20C91EEB00455D77 /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
+		422E489C20C91EF400455D77 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		423ADBE42099809D008A3846 /* TestAVFoundation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestAVFoundation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		423ADBE72099809D008A3846 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		423ADBE82099809D008A3846 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -56,12 +62,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				422E489D20C91EF400455D77 /* libmp3lame.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		422E489A20C91ED300455D77 /* lame */ = {
+			isa = PBXGroup;
+			children = (
+				422E489B20C91EEB00455D77 /* lame.h */,
+				422E489C20C91EF400455D77 /* libmp3lame.a */,
+			);
+			path = lame;
+			sourceTree = "<group>";
+		};
 		423ADBDB2099809C008A3846 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +97,7 @@
 		423ADBE62099809D008A3846 /* TestAVFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				422E489A20C91ED300455D77 /* lame */,
 				423ADC012099A9EE008A3846 /* 男声.mp3 */,
 				423ADBFD2099A886008A3846 /* 女声.mp3 */,
 				4274FAE6209AA3A300D76153 /* 宿命者.mp3 */,
@@ -98,6 +115,8 @@
 				42A5D15A20A3E23800566691 /* TestMoviePlayerViewController.m */,
 				42A5D15620A3DE0E00566691 /* FOFMoviePlayer.h */,
 				42A5D15720A3DE0E00566691 /* FOFMoviePlayer.m */,
+				422E489720C91EB700455D77 /* ConvertUtil.h */,
+				422E489820C91EB700455D77 /* ConvertUtil.m */,
 				423ADBED2099809E008A3846 /* Main.storyboard */,
 				423ADBF02099809E008A3846 /* Assets.xcassets */,
 				423ADBF22099809E008A3846 /* LaunchScreen.storyboard */,
@@ -185,6 +204,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				422E489920C91EB700455D77 /* ConvertUtil.m in Sources */,
 				423ADBEC2099809D008A3846 /* ViewController.m in Sources */,
 				423ADBF72099809E008A3846 /* main.m in Sources */,
 				42A5D15C20A3E23800566691 /* TestMoviePlayerViewController.m in Sources */,
@@ -331,6 +351,10 @@
 				INFOPLIST_FILE = TestAVFoundation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TestAVFoundation/lame",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fof.TestAVFoundation2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -349,6 +373,10 @@
 				INFOPLIST_FILE = TestAVFoundation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TestAVFoundation/lame",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fof.TestAVFoundation2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
