@@ -739,7 +739,7 @@ int CDECL lame_encode_buffer_interleaved(
         int                 mp3buf_size ); /* number of valid octets in this
                                               stream                        */
 
-
+ 
 /* as lame_encode_buffer, but for 'float's.
  * !! NOTE: !! data must still be scaled to be in the same range as
  * short int, +/- 32768

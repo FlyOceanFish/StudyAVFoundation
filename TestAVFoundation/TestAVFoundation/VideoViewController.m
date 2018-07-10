@@ -42,24 +42,48 @@
     [super viewDidLoad];
     self.title = @"视频";    
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
+    [self getVideoThumbnail:path];
+}
+UIImageView *iv;
+- (void)getVideoThumbnail:(NSString *)path{
+    AVAsset *asset = [AVAsset assetWithURL:[NSURL fileURLWithPath:path]];
+    NSLog(@"%d",asset.duration.timescale);
+    AVAssetImageGenerator *generator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+    NSError *error = nil;
+    CMTime actualTime;
+    generator.requestedTimeToleranceAfter = kCMTimeZero;
+    generator.requestedTimeToleranceBefore = kCMTimeZero;
+    CMTime time = CMTimeMake(1, 1);
+    CGImageRef imageRef = [generator copyCGImageAtTime:time actualTime:&actualTime error:&error];
+    UIImage *image = [UIImage imageWithCGImage:imageRef];
+    if (iv==nil) {
+        iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)/2.0)];
+        iv.contentMode = UIViewContentModeScaleAspectFit;
+        [self.view addSubview:iv];
+    }
+    iv.image = image;
+
+}
+- (void)initPlayer{
     [self.mlider setThumbImage:[UIImage imageNamed:@"dot"] forState:UIControlStateNormal];
     [self.mlider addObserver:self forKeyPath:@"tracking" options:NSKeyValueObservingOptionNew context:nil];
     
     
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"video2" ofType:@"mp4"];
-//    NSURL *url = [NSURL fileURLWithPath:path];
-
-//    NSURL *url = [NSURL URLWithString:@"http://static.tripbe.com/videofiles/20121214/9533522808.f4v.mp4"];
-//    NSURL *url = [NSURL URLWithString:@"http://192.168.9.196:8080/videos/video.mp4"];
+    //    NSString *path = [[NSBundle mainBundle] pathForResource:@"video2" ofType:@"mp4"];
+    //    NSURL *url = [NSURL fileURLWithPath:path];
+    
+    //    NSURL *url = [NSURL URLWithString:@"http://static.tripbe.com/videofiles/20121214/9533522808.f4v.mp4"];
+    //    NSURL *url = [NSURL URLWithString:@"http://192.168.9.196:8080/videos/video.mp4"];
     NSURL *url = [NSURL URLWithString:@"http://192.168.9.197:8080/videos/videos.mp4"];
     _playItem = [[AVPlayerItem alloc] initWithURL:url];
-//    _playItem.preferredForwardBufferDuration = 5;此属性设置缓存了多少秒就开始播放，不过要与AVPlayer的automaticallyWaitsToMinimizeStalling = false结合使用才行
-
-//    AVAsset *asset = [AVAsset assetWithURL:url];//实际是创建了AVURLAsset
-//    AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
-//    self.player = [AVPlayer playerWithPlayerItem:item];//此实例方法要配合以上两句实例才行，即通过AVAsset
+    //    _playItem.preferredForwardBufferDuration = 5;此属性设置缓存了多少秒就开始播放，不过要与AVPlayer的automaticallyWaitsToMinimizeStalling = false结合使用才行
     
-//    self.player = [[AVPlayer alloc] initWithPlayerItem:_playItem];//这是第二种方式
+    //    AVAsset *asset = [AVAsset assetWithURL:url];//实际是创建了AVURLAsset
+    //    AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
+    //    self.player = [AVPlayer playerWithPlayerItem:item];//此实例方法要配合以上两句实例才行，即通过AVAsset
+    
+    //    self.player = [[AVPlayer alloc] initWithPlayerItem:_playItem];//这是第二种方式
     
     self.player = [[AVPlayer alloc] init];//第三种方式苹果推荐的方式，先实例化一个空的AVPlayerLayer创建之后，通过replaceCurrentItemWithPlayerItem设置。最好的实践是在AVPlayer调用play之后调用replaceCurrentItemWithPlayerItem
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
@@ -69,13 +93,13 @@
     self.playerLayer.backgroundColor = [UIColor redColor].CGColor;
     self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
     [self.view.layer addSublayer:self.playerLayer];
-//监听播放器的状态，准备好播放、失败、未知错误
+    //监听播放器的状态，准备好播放、失败、未知错误
     [_playItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
-//    监听缓存的时间
+    //    监听缓存的时间
     [_playItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
-//    监听获取当缓存不够，视频加载不出来的情况：
+    //    监听获取当缓存不够，视频加载不出来的情况：
     [_playItem addObserver:self forKeyPath:@"playbackBufferEmpty" options:NSKeyValueObservingOptionNew context:nil];
-//    用于监听缓存足够播放的状态
+    //    用于监听缓存足够播放的状态
     [_playItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
     __weak typeof(self) this = self;
     [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 10) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
@@ -84,8 +108,8 @@
         this.mLabeStart.text = [this getMMSSFromSS:(int)currentTime];
         this.mLabelTimeLeft.text = [this getMMSSFromSS:(int)(CMTimeGetSeconds(this.duration)-currentTime)];
     }];
-
-
+    
+    
     _btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_btn setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
     [_btn setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateSelected];
@@ -104,10 +128,10 @@
         [self.mSegmentedControl insertSegmentWithTitle:@"X4" atIndex:3 animated:NO];
     }
     [self.mSegmentedControl addTarget:self action:@selector(segmentedIndexChanged:) forControlEvents:UIControlEventValueChanged];
-//    AVPlayerTimeControlStatusPaused, 暂停
-//    AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate,等待播放
-//    AVPlayerTimeControlStatusPlaying 播放
-//    _player.timeControlStatus
+    //    AVPlayerTimeControlStatusPaused, 暂停
+    //    AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate,等待播放
+    //    AVPlayerTimeControlStatusPlaying 播放
+    //    _player.timeControlStatus
 }
 #pragma mark - Action
 - (void)actionPlayPause:(UIButton *)sender {
