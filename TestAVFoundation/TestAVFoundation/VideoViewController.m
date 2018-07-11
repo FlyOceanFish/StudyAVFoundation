@@ -48,22 +48,32 @@
 UIImageView *iv;
 - (void)getVideoThumbnail:(NSString *)path{
     AVAsset *asset = [AVAsset assetWithURL:[NSURL fileURLWithPath:path]];
+    
     NSLog(@"%d",asset.duration.timescale);
     AVAssetImageGenerator *generator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+    generator.maximumSize = CGSizeMake(480,136);//如果是CGSizeMake(480,136)，则获取到的图片是{240, 136}。与实际大小成比例
+//    generator.apertureMode = AVAssetImageGeneratorApertureModeCleanAperture;
+    generator.appliesPreferredTrackTransform = YES;//这个属性保证我们获取的图片的方向是正确的。比如有的视频需要旋转手机方向才是视频的正确方向。
     NSError *error = nil;
-    CMTime actualTime;
+    CMTime actualTime;//确切获取图片的时间位置
+    /**因为有误差，所以需要设置以下两个属性。如果不设置误差有点大，设置了之后相差非常非常的小**/
     generator.requestedTimeToleranceAfter = kCMTimeZero;
     generator.requestedTimeToleranceBefore = kCMTimeZero;
-    CMTime time = CMTimeMake(1, 1);
+    CMTime time = CMTimeMake(1,1);//想要获取图片的时间位置
     CGImageRef imageRef = [generator copyCGImageAtTime:time actualTime:&actualTime error:&error];
-    UIImage *image = [UIImage imageWithCGImage:imageRef];
-    if (iv==nil) {
-        iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)/2.0)];
-        iv.contentMode = UIViewContentModeScaleAspectFit;
-        [self.view addSubview:iv];
+    
+    if (!error) {
+        CMTimeShow(actualTime);//{1181/600 = 1.968}
+        CMTimeShow(time);//{88200/44100 = 2.000}
+        UIImage *image = [UIImage imageWithCGImage:imageRef];
+        if (iv==nil) {
+            iv = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300,600)];
+            iv.contentMode = UIViewContentModeScaleAspectFit;
+            [self.view addSubview:iv];
+        }
+        iv.image = image;
+        iv.backgroundColor = [UIColor redColor];
     }
-    iv.image = image;
-
 }
 - (void)initPlayer{
     [self.mlider setThumbImage:[UIImage imageNamed:@"dot"] forState:UIControlStateNormal];
