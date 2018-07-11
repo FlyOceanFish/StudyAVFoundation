@@ -1,25 +1,30 @@
 //
-//  TestMoviePlayerViewController.m
+//  VideoEditViewController.m
 //  TestAVFoundation
 //
-//  Created by FlyOceanFish on 2018/5/10.
+//  Created by FlyOceanFish on 2018/7/11.
 //  Copyright © 2018年 FlyOceanFish. All rights reserved.
 //
 
-#import "TestMoviePlayerViewController.h"
-#import "FOFMoviePlayerView.h"
+#import "VideoEditViewController.h"
+#import "FOFMoviePlayer.h"
 
-@interface TestMoviePlayerViewController ()
-
-@property (weak, nonatomic) IBOutlet FOFMoviePlayerView *mMoviePlayer;
+@interface VideoEditViewController ()
+@property (nonatomic,strong)FOFMoviePlayer *moviePlayer;
 @end
 
-@implementation TestMoviePlayerViewController
+@implementation VideoEditViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.mMoviePlayer.url = [NSURL URLWithString:@"http://192.168.9.197:8080/videos/videos.mp4"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
+    
+    self.moviePlayer = [[FOFMoviePlayer alloc] initWithFrame:CGRectMake(10, 20,400, 300) url:[NSURL fileURLWithPath:path] superLayer:self.view.layer loop:true];
+    __weak typeof(self) this = self;
+    [self.moviePlayer setBlockStatusReadyPlay:^{
+        [this.moviePlayer fof_play];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface FOFMoviePlayer : UIView
+@interface FOFMoviePlayerView : UIView
 
 @property(nonatomic,strong)NSURL *url;
 

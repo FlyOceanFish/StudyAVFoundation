@@ -6,9 +6,9 @@
 //  Copyright © 2018年 FlyOceanFish. All rights reserved.
 //
 
-#import "FOFMoviePlayer.h"
+#import "FOFMoviePlayerView.h"
 
-@interface FOFMoviePlayer()
+@interface FOFMoviePlayerView()
 {
     UIView *_indicatorView;
     AVPlayerLooper *_playerLooper;
@@ -27,7 +27,7 @@
 @property (strong, nonatomic)  UIActivityIndicatorView *indicator;
 @property (strong, nonatomic)  UISegmentedControl *mSegmentedControl;
 @end
-@implementation FOFMoviePlayer
+@implementation FOFMoviePlayerView
 
 - (instancetype)initWithURL:(NSURL *)url{
     self = [super init];

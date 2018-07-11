@@ -23,8 +23,10 @@
 		42A5D14C20A0197F00566691 /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5D14B20A0197F00566691 /* VideoViewController.m */; };
 		42A5D14E20A0225A00566691 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 42A5D14D20A0225A00566691 /* video.mp4 */; };
 		42A5D15220A130EA00566691 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 42A5D15120A130EA00566691 /* video2.mp4 */; };
-		42A5D15820A3DE0E00566691 /* FOFMoviePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5D15720A3DE0E00566691 /* FOFMoviePlayer.m */; };
+		42A5D15820A3DE0E00566691 /* FOFMoviePlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5D15720A3DE0E00566691 /* FOFMoviePlayerView.m */; };
 		42A5D15C20A3E23800566691 /* TestMoviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5D15A20A3E23800566691 /* TestMoviePlayerViewController.m */; };
+		42A734CB20F596270079E862 /* VideoEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A734CA20F596270079E862 /* VideoEditViewController.m */; };
+		42A734CE20F597BE0079E862 /* FOFMoviePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A734CD20F597BE0079E862 /* FOFMoviePlayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,10 +53,14 @@
 		42A5D14B20A0197F00566691 /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
 		42A5D14D20A0225A00566691 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 		42A5D15120A130EA00566691 /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
-		42A5D15620A3DE0E00566691 /* FOFMoviePlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FOFMoviePlayer.h; sourceTree = "<group>"; };
-		42A5D15720A3DE0E00566691 /* FOFMoviePlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FOFMoviePlayer.m; sourceTree = "<group>"; };
+		42A5D15620A3DE0E00566691 /* FOFMoviePlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FOFMoviePlayerView.h; sourceTree = "<group>"; };
+		42A5D15720A3DE0E00566691 /* FOFMoviePlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FOFMoviePlayerView.m; sourceTree = "<group>"; };
 		42A5D15920A3E23800566691 /* TestMoviePlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestMoviePlayerViewController.h; sourceTree = "<group>"; };
 		42A5D15A20A3E23800566691 /* TestMoviePlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestMoviePlayerViewController.m; sourceTree = "<group>"; };
+		42A734C920F596270079E862 /* VideoEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoEditViewController.h; sourceTree = "<group>"; };
+		42A734CA20F596270079E862 /* VideoEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoEditViewController.m; sourceTree = "<group>"; };
+		42A734CC20F597BE0079E862 /* FOFMoviePlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FOFMoviePlayer.h; sourceTree = "<group>"; };
+		42A734CD20F597BE0079E862 /* FOFMoviePlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FOFMoviePlayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,7 @@
 		423ADBE62099809D008A3846 /* TestAVFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				42A734C820F595DC0079E862 /* VideoEdit */,
 				422E489A20C91ED300455D77 /* lame */,
 				423ADC012099A9EE008A3846 /* 男声.mp3 */,
 				423ADBFD2099A886008A3846 /* 女声.mp3 */,
@@ -113,8 +120,8 @@
 				42A5D14B20A0197F00566691 /* VideoViewController.m */,
 				42A5D15920A3E23800566691 /* TestMoviePlayerViewController.h */,
 				42A5D15A20A3E23800566691 /* TestMoviePlayerViewController.m */,
-				42A5D15620A3DE0E00566691 /* FOFMoviePlayer.h */,
-				42A5D15720A3DE0E00566691 /* FOFMoviePlayer.m */,
+				42A5D15620A3DE0E00566691 /* FOFMoviePlayerView.h */,
+				42A5D15720A3DE0E00566691 /* FOFMoviePlayerView.m */,
 				422E489720C91EB700455D77 /* ConvertUtil.h */,
 				422E489820C91EB700455D77 /* ConvertUtil.m */,
 				423ADBED2099809E008A3846 /* Main.storyboard */,
@@ -124,6 +131,17 @@
 				423ADBF62099809E008A3846 /* main.m */,
 			);
 			path = TestAVFoundation;
+			sourceTree = "<group>";
+		};
+		42A734C820F595DC0079E862 /* VideoEdit */ = {
+			isa = PBXGroup;
+			children = (
+				42A734C920F596270079E862 /* VideoEditViewController.h */,
+				42A734CA20F596270079E862 /* VideoEditViewController.m */,
+				42A734CC20F597BE0079E862 /* FOFMoviePlayer.h */,
+				42A734CD20F597BE0079E862 /* FOFMoviePlayer.m */,
+			);
+			path = VideoEdit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,11 +222,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42A734CE20F597BE0079E862 /* FOFMoviePlayer.m in Sources */,
+				42A734CB20F596270079E862 /* VideoEditViewController.m in Sources */,
 				422E489920C91EB700455D77 /* ConvertUtil.m in Sources */,
 				423ADBEC2099809D008A3846 /* ViewController.m in Sources */,
 				423ADBF72099809E008A3846 /* main.m in Sources */,
 				42A5D15C20A3E23800566691 /* TestMoviePlayerViewController.m in Sources */,
-				42A5D15820A3DE0E00566691 /* FOFMoviePlayer.m in Sources */,
+				42A5D15820A3DE0E00566691 /* FOFMoviePlayerView.m in Sources */,
 				42A5D14C20A0197F00566691 /* VideoViewController.m in Sources */,
 				423ADBE92099809D008A3846 /* AppDelegate.m in Sources */,
 			);
