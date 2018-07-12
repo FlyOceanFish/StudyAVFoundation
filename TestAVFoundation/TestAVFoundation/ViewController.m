@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     NSError *error = nil;
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];//支持后台播放和录音
     [[AVAudioSession sharedInstance] setActive:YES error:nil];//这两行代码在录音和播放的时候要写，否则会失败

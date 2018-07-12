@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-typedef void(^BlockStatusReadyPlay)(void);
+typedef void(^BlockStatusReadyPlay)(AVPlayerItem *palyItem);
 typedef void(^BlockStatusFailed)(void);
 typedef void(^BlockStatusUnknown)(void);
 typedef void(^BlockTracking)(NSInteger status);
@@ -26,9 +26,9 @@ typedef void(^BlockPlaybackLikelyToKeepUp)(BOOL keepUp);
 
 @property(nonatomic,strong,readonly)NSURL *url;
 
-@property(nonatomic,strong)AVPlayer *player;
-@property(nonatomic,strong)AVPlayerLayer *playerLayer;
-@property(nonatomic,strong)AVPlayerItem *playItem;
+@property(nonatomic,strong,readonly)AVPlayer *player;
+@property(nonatomic,strong,readonly)AVPlayerLayer *playerLayer;
+@property(nonatomic,strong,readonly)AVPlayerItem *playItem;
 
 -(instancetype)initWithFrame:(CGRect)frame url:(NSURL *)url superLayer:(CALayer *)superLayer;
 -(instancetype)initWithFrame:(CGRect)frame url:(NSURL *)url superLayer:(CALayer *)superLayer loop:(BOOL)loop;

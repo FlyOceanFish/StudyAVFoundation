@@ -14,6 +14,11 @@
     BOOL _loop;
 }
 @property(nonatomic,strong)NSURL *url;
+
+@property(nonatomic,strong)AVPlayer *player;
+@property(nonatomic,strong)AVPlayerLayer *playerLayer;
+@property(nonatomic,strong)AVPlayerItem *playItem;
+
 @property (nonatomic,assign) CMTime duration;
 @end
 @implementation FOFMoviePlayer
@@ -62,7 +67,7 @@
             _duration = item.duration;//只有在此状态下才能获取，不能在AVPlayerItem初始化后马上获取
             NSLog(@"准备播放");
             if (self.blockStatusReadyPlay) {
-                self.blockStatusReadyPlay();
+                self.blockStatusReadyPlay(item);
             }
         } else if (status == AVPlayerItemStatusFailed) {
             if (self.blockStatusFailed) {
@@ -127,13 +132,20 @@
     return _playItem;
 }
 - (void)private_playerMovieFinish{
-    NSLog(@"播放结束");
-    if (_loop) {
-        [self.player pause];
-        [self.player seekToTime:CMTimeMake(1, 1) completionHandler:^(BOOL finished) {
-            [self.player play];
-        }];
-    }
+//    NSLog(@"播放结束");
+//    if (_loop) {
+//        [self.player pause];
+//        CMTime time = CMTimeMake(1, 1);
+//        
+////        if (!CMTIME_IS_INVALID(self.playItem.reversePlaybackEndTime)&&CMTimeGetSeconds(self.playItem.reversePlaybackEndTime)) {
+////            NSLog(@"获取到的时间---%f",CMTimeGetSeconds(self.playItem.reversePlaybackEndTime));
+////            time = self.playItem.reversePlaybackEndTime;
+////        }
+//        __weak typeof(self)this = self;
+//        [self.player seekToTime:time completionHandler:^(BOOL finished) {
+//            [this.player play];
+//        }];
+//    }
 }
 -(void)dealloc{
     NSLog(@"-----销毁-----");

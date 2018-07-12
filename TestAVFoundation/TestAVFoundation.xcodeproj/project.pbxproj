@@ -27,6 +27,9 @@
 		42A5D15C20A3E23800566691 /* TestMoviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5D15A20A3E23800566691 /* TestMoviePlayerViewController.m */; };
 		42A734CB20F596270079E862 /* VideoEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A734CA20F596270079E862 /* VideoEditViewController.m */; };
 		42A734CE20F597BE0079E862 /* FOFMoviePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A734CD20F597BE0079E862 /* FOFMoviePlayer.m */; };
+		42A734D120F5D2EF0079E862 /* VideoPieces.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A734D020F5D2EF0079E862 /* VideoPieces.m */; };
+		42A734D420F5D8940079E862 /* Haft.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A734D320F5D8940079E862 /* Haft.m */; };
+		42A734D720F5E99C0079E862 /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A734D620F5E99C0079E862 /* Line.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +64,12 @@
 		42A734CA20F596270079E862 /* VideoEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoEditViewController.m; sourceTree = "<group>"; };
 		42A734CC20F597BE0079E862 /* FOFMoviePlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FOFMoviePlayer.h; sourceTree = "<group>"; };
 		42A734CD20F597BE0079E862 /* FOFMoviePlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FOFMoviePlayer.m; sourceTree = "<group>"; };
+		42A734CF20F5D2EF0079E862 /* VideoPieces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoPieces.h; sourceTree = "<group>"; };
+		42A734D020F5D2EF0079E862 /* VideoPieces.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoPieces.m; sourceTree = "<group>"; };
+		42A734D220F5D8940079E862 /* Haft.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Haft.h; sourceTree = "<group>"; };
+		42A734D320F5D8940079E862 /* Haft.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Haft.m; sourceTree = "<group>"; };
+		42A734D520F5E99C0079E862 /* Line.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
+		42A734D620F5E99C0079E862 /* Line.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Line.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +147,12 @@
 			children = (
 				42A734C920F596270079E862 /* VideoEditViewController.h */,
 				42A734CA20F596270079E862 /* VideoEditViewController.m */,
+				42A734CF20F5D2EF0079E862 /* VideoPieces.h */,
+				42A734D020F5D2EF0079E862 /* VideoPieces.m */,
+				42A734D220F5D8940079E862 /* Haft.h */,
+				42A734D320F5D8940079E862 /* Haft.m */,
+				42A734D520F5E99C0079E862 /* Line.h */,
+				42A734D620F5E99C0079E862 /* Line.m */,
 				42A734CC20F597BE0079E862 /* FOFMoviePlayer.h */,
 				42A734CD20F597BE0079E862 /* FOFMoviePlayer.m */,
 			);
@@ -223,14 +238,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				42A734CE20F597BE0079E862 /* FOFMoviePlayer.m in Sources */,
+				42A734D720F5E99C0079E862 /* Line.m in Sources */,
 				42A734CB20F596270079E862 /* VideoEditViewController.m in Sources */,
 				422E489920C91EB700455D77 /* ConvertUtil.m in Sources */,
 				423ADBEC2099809D008A3846 /* ViewController.m in Sources */,
 				423ADBF72099809E008A3846 /* main.m in Sources */,
 				42A5D15C20A3E23800566691 /* TestMoviePlayerViewController.m in Sources */,
+				42A734D120F5D2EF0079E862 /* VideoPieces.m in Sources */,
 				42A5D15820A3DE0E00566691 /* FOFMoviePlayerView.m in Sources */,
 				42A5D14C20A0197F00566691 /* VideoViewController.m in Sources */,
 				423ADBE92099809D008A3846 /* AppDelegate.m in Sources */,
+				42A734D420F5D8940079E862 /* Haft.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
