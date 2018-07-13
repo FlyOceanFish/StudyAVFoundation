@@ -15,4 +15,5 @@ typedef void(^BlockSeekOff)(CGFloat offX);
 @property (nonatomic,copy)BlockSeekOff blockSeekOffLeft;
 @property (nonatomic,copy)BlockSeekOff blockSeekOffRight;
 @property (nonatomic,copy)BlockMoveEnd blockMoveEnd;
+@property (nonatomic,assign)CGFloat minGap;
 @end

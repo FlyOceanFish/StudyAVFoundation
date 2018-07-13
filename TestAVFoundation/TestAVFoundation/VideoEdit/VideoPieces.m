@@ -32,7 +32,7 @@
 - (void)initSubViews:(CGRect)frame{
     CGFloat height = CGRectGetHeight(frame);
     CGFloat width = CGRectGetWidth(frame);
-    CGFloat minGap = 30;
+    _minGap = 30;
     CGFloat widthHaft = 10;
     CGFloat heightLine = 3;
     _leftHaft = [[Haft alloc] initWithFrame:CGRectMake(0, 0, widthHaft, height)];
@@ -42,7 +42,7 @@
     _leftHaft.lefEdgeInset = 5;
     __weak typeof(self) this = self;
     [_leftHaft setBlockMove:^(CGPoint point) {
-        CGFloat maxX = this.rightHaft.frame.origin.x-minGap;
+        CGFloat maxX = this.rightHaft.frame.origin.x-this.minGap;
         if (point.x<maxX) {
             this.topLine.beginPoint = CGPointMake(point.x, heightLine/2.0);
             this.bottomLine.beginPoint = CGPointMake(point.x, heightLine/2.0);
@@ -64,7 +64,7 @@
     _rightHaft.lefEdgeInset = 20;
     _rightHaft.rightEdgeInset = 5;
     [_rightHaft setBlockMove:^(CGPoint point) {
-        CGFloat minX = this.leftHaft.frame.origin.x+minGap+CGRectGetWidth(this.rightHaft.bounds);
+        CGFloat minX = this.leftHaft.frame.origin.x+this.minGap+CGRectGetWidth(this.rightHaft.bounds);
         if (point.x>=minX) {
             this.topLine.endPoint = CGPointMake(point.x-widthHaft, heightLine/2.0);
             this.bottomLine.endPoint = CGPointMake(point.x-widthHaft, heightLine/2.0);
