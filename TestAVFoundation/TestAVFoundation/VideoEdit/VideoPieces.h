@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Haft.h"
 
-typedef void(^BlockSeekOff)(float offX);
+typedef void(^BlockSeekOff)(CGFloat offX);
 
 @interface VideoPieces : UIView
 @property (nonatomic,copy)BlockSeekOff blockSeekOffLeft;
 @property (nonatomic,copy)BlockSeekOff blockSeekOffRight;
-@property (nonatomic,copy)BlockEnd blockEnd;
+@property (nonatomic,copy)BlockMoveEnd blockMoveEnd;
 @end

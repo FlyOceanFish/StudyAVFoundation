@@ -12,12 +12,14 @@
 
 @interface VideoEditViewController (){
     UIImageView *iv;
-    
 }
 @property (nonatomic,strong)FOFMoviePlayer *moviePlayer;
 @property (nonatomic,strong)VideoPieces *videoPieces;
-@property (nonatomic,assign)Float64 seconds;
+@property (nonatomic,assign)CGFloat totalSeconds;
+@property (nonatomic,assign)CGFloat lastStartSeconds;
+@property (nonatomic,assign)CGFloat lastEndSeconds;
 @property (nonatomic,assign)BOOL seeking;
+@property (nonatomic,strong)id timeObserverToken;
 @end
 
 @implementation VideoEditViewController
@@ -25,45 +27,53 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.view.backgroundColor = [UIColor blackColor];
     NSString *path = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
-
-    self.moviePlayer = [[FOFMoviePlayer alloc] initWithFrame:CGRectMake(10, 20,400, 300) url:[NSURL fileURLWithPath:path] superLayer:self.view.layer loop:true];
+    self.lastEndSeconds = NAN;
+    self.moviePlayer = [[FOFMoviePlayer alloc] initWithFrame:CGRectMake(10, 20,400, 300) url:[NSURL fileURLWithPath:path] superLayer:self.view.layer];
     __weak typeof(self) this = self;
     [self.moviePlayer setBlockStatusReadyPlay:^(AVPlayerItem *playItem){
         [this.moviePlayer fof_play];
-//        AVAssetTrack *videoAssetTrack = playItem.asset.tracks.firstObject;
-//
-//        AVMutableVideoCompositionInstruction *videoCompositionIns = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-//        [videoCompositionIns setTimeRange:CMTimeRangeMake(kCMTimeZero, videoAssetTrack.timeRange.duration)];
-//
-//        AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
-//        videoComposition.instructions = @[videoCompositionIns];
-//        //裁剪出对应的大小
-//        videoComposition.frameDuration = CMTimeMake(3, 1);
-//        [playItem setVideoComposition:videoComposition];
-        
-        this.seconds = CMTimeGetSeconds(playItem.duration);
+        this.totalSeconds = CMTimeGetSeconds(playItem.duration);
     }];
-    float width = CGRectGetWidth(self.view.bounds);
-    _videoPieces = [[VideoPieces alloc] initWithFrame:CGRectMake(30, 350, width-60, 80)];
-    [_videoPieces setBlockSeekOffLeft:^(float offX) {
-        this.seeking = true;
-        [this.moviePlayer fof_pause];
-        float seconds = _seconds*offX/CGRectGetWidth(this.videoPieces.bounds);
-        [this.moviePlayer.player seekToTime:CMTimeMake(seconds, 1) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
-        [this.moviePlayer.playItem setReversePlaybackEndTime:CMTimeMake(seconds, 1)];
+    [self.moviePlayer setBlockPlayToEndTime:^{
+        [this private_replayAtBeginTime:this.lastStartSeconds];
     }];
-    [_videoPieces setBlockEnd:^{
-        NSLog(@"结束");
-        if (this.seeking) {
-            [this.moviePlayer fof_play];
-            this.seeking = false;
+
+    self.timeObserverToken = [self.moviePlayer.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(0.5, NSEC_PER_SEC) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+        if (!this.seeking) {
+            if (fabs(CMTimeGetSeconds(time)-this.lastEndSeconds)<=0.02) {
+                    [this.moviePlayer fof_pause];
+                    [this private_replayAtBeginTime:this.lastStartSeconds];
+                }
         }
     }];
-    _videoPieces.backgroundColor = [UIColor redColor];
+    CGFloat width = CGRectGetWidth(self.view.bounds);
+    _videoPieces = [[VideoPieces alloc] initWithFrame:CGRectMake(30, 350, width-60, 80)];
+    [_videoPieces setBlockSeekOffLeft:^(CGFloat offX) {
+        this.seeking = true;
+        [this.moviePlayer fof_pause];
+        this.lastStartSeconds = this.totalSeconds*offX/CGRectGetWidth(this.videoPieces.bounds);
+        [this.moviePlayer.player seekToTime:CMTimeMakeWithSeconds(this.lastStartSeconds, 1) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    }];
+    [_videoPieces setBlockSeekOffRight:^(CGFloat offX) {
+        this.seeking = true;
+        [this.moviePlayer fof_pause];
+        this.lastEndSeconds = this.totalSeconds*offX/CGRectGetWidth(this.videoPieces.bounds);
+        [this.moviePlayer.player seekToTime:CMTimeMakeWithSeconds(this.lastEndSeconds, 1) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    }];
+    
+    [_videoPieces setBlockMoveEnd:^{
+        NSLog(@"滑动结束");
+        if (this.seeking) {
+            this.seeking = false;
+            [this private_replayAtBeginTime:this.lastStartSeconds];
+        }
+    }];
+    _videoPieces.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_videoPieces];
-    float widthIV = (CGRectGetWidth(_videoPieces.frame))/10.0;
-    float heightIV = CGRectGetHeight(_videoPieces.frame);
+    CGFloat widthIV = (CGRectGetWidth(_videoPieces.frame))/10.0;
+    CGFloat heightIV = CGRectGetHeight(_videoPieces.frame);
     [self getVideoThumbnail:path count:10 splitCompleteBlock:^(BOOL success, NSMutableArray *splitimgs) {
         for (int i = 0; i<splitimgs.count; i++) {
             UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(i*widthIV, 3, widthIV, heightIV-6)];
@@ -73,7 +83,10 @@
         }
     }];
 }
-
+- (void)private_replayAtBeginTime:(Float64)beginTime{
+    [self.moviePlayer.player seekToTime:CMTimeMakeWithSeconds(self.lastStartSeconds, 1) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    [self.moviePlayer fof_play];
+}
 - (NSArray *)getVideoThumbnail:(NSString *)path count:(NSInteger)count splitCompleteBlock:(void(^)(BOOL success, NSMutableArray *splitimgs))splitCompleteBlock {
     AVAsset *asset = [AVAsset assetWithURL:[NSURL fileURLWithPath:path]];
     NSMutableArray *arrayImages = [NSMutableArray array];
@@ -87,7 +100,7 @@
         Float64 seconds = CMTimeGetSeconds(asset.duration);
         NSMutableArray *array = [NSMutableArray array];
         for (int i = 0; i<count; i++) {
-            CMTime time = CMTimeMake(i*(seconds/10.0),1);//想要获取图片的时间位置
+            CMTime time = CMTimeMakeWithSeconds(i*(seconds/10.0),1);//想要获取图片的时间位置
             [array addObject:[NSValue valueWithCMTime:time]];
         }
         __block int i = 0;
@@ -106,19 +119,12 @@
                 });
             }
         }];
-//        CMTimeShow(actualTime);//{1181/600 = 1.968}
-//        CMTimeShow(time);//{88200/44100 = 2.000}
-//        UIImage *image = [UIImage imageWithCGImage:imageRef];
-//        if (iv==nil) {
-//            iv = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300,600)];
-//            iv.contentMode = UIViewContentModeScaleAspectFit;
-//            [self.view addSubview:iv];
-//        }
-//        iv.image = image;
-//        iv.backgroundColor = [UIColor redColor];
     }];
     return arrayImages;
 
+}
+-(void)dealloc{
+    [self.moviePlayer.player removeTimeObserver:self.timeObserverToken];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

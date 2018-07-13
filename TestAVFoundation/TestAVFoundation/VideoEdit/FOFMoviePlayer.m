@@ -94,8 +94,8 @@
     }else if ([keyPath isEqualToString:@"loadedTimeRanges"]){
         NSArray *array = _playItem.loadedTimeRanges;
         CMTimeRange timeRange = [array.firstObject CMTimeRangeValue];//本次缓冲时间范围
-        float startSeconds = CMTimeGetSeconds(timeRange.start);
-        float durationSeconds = CMTimeGetSeconds(timeRange.duration);
+        CGFloat startSeconds = CMTimeGetSeconds(timeRange.start);
+        CGFloat durationSeconds = CMTimeGetSeconds(timeRange.duration);
         NSTimeInterval totalBuffer = startSeconds + durationSeconds;//缓冲总长度
         double progress = totalBuffer/CMTimeGetSeconds(_duration);
         if (self.blockLoadedTimeRanges) {
@@ -127,25 +127,24 @@
     [_playItem addObserver:self forKeyPath:@"playbackBufferEmpty" options:NSKeyValueObservingOptionNew context:nil];
     //    用于监听缓存足够播放的状态
     [_playItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(private_playerMovieFinish) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     
     return _playItem;
 }
 - (void)private_playerMovieFinish{
-//    NSLog(@"播放结束");
-//    if (_loop) {
-//        [self.player pause];
-//        CMTime time = CMTimeMake(1, 1);
-//        
-////        if (!CMTIME_IS_INVALID(self.playItem.reversePlaybackEndTime)&&CMTimeGetSeconds(self.playItem.reversePlaybackEndTime)) {
-////            NSLog(@"获取到的时间---%f",CMTimeGetSeconds(self.playItem.reversePlaybackEndTime));
-////            time = self.playItem.reversePlaybackEndTime;
-////        }
-//        __weak typeof(self)this = self;
-//        [self.player seekToTime:time completionHandler:^(BOOL finished) {
-//            [this.player play];
-//        }];
-//    }
+    NSLog(@"播放结束");
+    if (self.blockPlayToEndTime) {
+        self.blockPlayToEndTime();
+    }
+    if (_loop) {
+        [self.player pause];
+        CMTime time = CMTimeMake(1, 1);
+        __weak typeof(self)this = self;
+        [self.player seekToTime:time completionHandler:^(BOOL finished) {
+            [this.player play];
+        }];
+    }
 }
 -(void)dealloc{
     NSLog(@"-----销毁-----");

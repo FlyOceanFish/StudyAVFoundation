@@ -30,19 +30,19 @@
     return self;
 }
 - (void)initSubViews:(CGRect)frame{
-    float height = CGRectGetHeight(frame);
-    float width = CGRectGetWidth(frame);
-    float minGap = 30;
-    float widthHaft = 10;
-    float heightLine = 3;
+    CGFloat height = CGRectGetHeight(frame);
+    CGFloat width = CGRectGetWidth(frame);
+    CGFloat minGap = 30;
+    CGFloat widthHaft = 10;
+    CGFloat heightLine = 3;
     _leftHaft = [[Haft alloc] initWithFrame:CGRectMake(0, 0, widthHaft, height)];
     _leftHaft.alpha = 0.8;
-    _leftHaft.backgroundColor = [UIColor colorWithWhite:0.9 alpha:0.9];
+    _leftHaft.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     _leftHaft.rightEdgeInset = 20;
     _leftHaft.lefEdgeInset = 5;
     __weak typeof(self) this = self;
     [_leftHaft setBlockMove:^(CGPoint point) {
-        float maxX = this.rightHaft.frame.origin.x-minGap;
+        CGFloat maxX = this.rightHaft.frame.origin.x-minGap;
         if (point.x<maxX) {
             this.topLine.beginPoint = CGPointMake(point.x, heightLine/2.0);
             this.bottomLine.beginPoint = CGPointMake(point.x, heightLine/2.0);
@@ -52,27 +52,33 @@
                 this.blockSeekOffLeft(point.x);
             }
         }
-        NSLog(@"%@",NSStringFromCGPoint(point));
     }];
-    [_leftHaft setBlockEnd:^{
-        if (this.blockEnd) {
-            this.blockEnd();
+    [_leftHaft setBlockMoveEnd:^{
+        if (this.blockMoveEnd) {
+            this.blockMoveEnd();
         }
     }];
     _rightHaft = [[Haft alloc] initWithFrame:CGRectMake(width-widthHaft, 0, widthHaft, height)];
     _rightHaft.alpha = 0.8;
-    _rightHaft.backgroundColor = [UIColor colorWithWhite:0.9 alpha:0.9];
+    _rightHaft.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     _rightHaft.lefEdgeInset = 20;
     _rightHaft.rightEdgeInset = 5;
     [_rightHaft setBlockMove:^(CGPoint point) {
-        float minX = this.leftHaft.frame.origin.x+minGap+CGRectGetWidth(this.rightHaft.bounds);
+        CGFloat minX = this.leftHaft.frame.origin.x+minGap+CGRectGetWidth(this.rightHaft.bounds);
         if (point.x>=minX) {
             this.topLine.endPoint = CGPointMake(point.x-widthHaft, heightLine/2.0);
             this.bottomLine.endPoint = CGPointMake(point.x-widthHaft, heightLine/2.0);
             this.rightHaft.frame = CGRectMake(point.x, 0, widthHaft, height);
             this.rightMaskView.frame = CGRectMake(point.x+widthHaft, 0, width-point.x-widthHaft, height);
+            if (this.blockSeekOffRight) {
+                this.blockSeekOffRight(point.x);
+            }
         }
-        NSLog(@"%@",NSStringFromCGPoint(point));
+    }];
+    [_rightHaft setBlockMoveEnd:^{
+        if (this.blockMoveEnd) {
+            this.blockMoveEnd();
+        }
     }];
     _topLine = [[Line alloc] init];
     _topLine.alpha = 0.8;

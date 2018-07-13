@@ -15,6 +15,7 @@ typedef void(^BlockStatusUnknown)(void);
 typedef void(^BlockTracking)(NSInteger status);
 typedef void(^BlockLoadedTimeRanges)(double progress);
 typedef void(^BlockPlaybackLikelyToKeepUp)(BOOL keepUp);
+typedef void(^BlockPlayToEndTime)(void);
 
 @interface FOFMoviePlayer : NSObject
 @property(nonatomic,copy)BlockStatusReadyPlay blockStatusReadyPlay;
@@ -23,6 +24,7 @@ typedef void(^BlockPlaybackLikelyToKeepUp)(BOOL keepUp);
 @property(nonatomic,copy)BlockTracking blockTracking;
 @property(nonatomic,copy)BlockLoadedTimeRanges blockLoadedTimeRanges;
 @property(nonatomic,copy)BlockPlaybackLikelyToKeepUp blockPlaybackLikelyToKeepUp;
+@property(nonatomic,copy)BlockPlayToEndTime blockPlayToEndTime;
 
 @property(nonatomic,strong,readonly)NSURL *url;
 

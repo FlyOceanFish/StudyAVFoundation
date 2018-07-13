@@ -20,7 +20,8 @@
 		423ADC022099A9EE008A3846 /* 男声.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 423ADC012099A9EE008A3846 /* 男声.mp3 */; };
 		4274FAE7209AA3A300D76153 /* 宿命者.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4274FAE6209AA3A300D76153 /* 宿命者.mp3 */; };
 		4274FAEB209AAFA200D76153 /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 4274FAEA209AAFA200D76153 /* empty.png */; };
-		42A5D14C20A0197F00566691 /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5D14B20A0197F00566691 /* VideoViewController.m */; };
+		4276A01A20F8337600000DEE /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4276A01920F8337500000DEE /* VideoPlayerViewController.m */; };
+		4276A01D20F8339E00000DEE /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4276A01C20F8339E00000DEE /* VideoViewController.m */; };
 		42A5D14E20A0225A00566691 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 42A5D14D20A0225A00566691 /* video.mp4 */; };
 		42A5D15220A130EA00566691 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 42A5D15120A130EA00566691 /* video2.mp4 */; };
 		42A5D15820A3DE0E00566691 /* FOFMoviePlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5D15720A3DE0E00566691 /* FOFMoviePlayerView.m */; };
@@ -52,8 +53,10 @@
 		423ADC012099A9EE008A3846 /* 男声.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "男声.mp3"; sourceTree = "<group>"; };
 		4274FAE6209AA3A300D76153 /* 宿命者.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "宿命者.mp3"; sourceTree = "<group>"; };
 		4274FAEA209AAFA200D76153 /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
-		42A5D14A20A0197F00566691 /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
-		42A5D14B20A0197F00566691 /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
+		4276A01920F8337500000DEE /* VideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewController.m; sourceTree = "<group>"; };
+		4276A01B20F8339E00000DEE /* VideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
+		4276A01C20F8339E00000DEE /* VideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
+		42A5D14A20A0197F00566691 /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
 		42A5D14D20A0225A00566691 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 		42A5D15120A130EA00566691 /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
 		42A5D15620A3DE0E00566691 /* FOFMoviePlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FOFMoviePlayerView.h; sourceTree = "<group>"; };
@@ -125,8 +128,10 @@
 				423ADBE82099809D008A3846 /* AppDelegate.m */,
 				423ADBEA2099809D008A3846 /* ViewController.h */,
 				423ADBEB2099809D008A3846 /* ViewController.m */,
-				42A5D14A20A0197F00566691 /* VideoViewController.h */,
-				42A5D14B20A0197F00566691 /* VideoViewController.m */,
+				4276A01B20F8339E00000DEE /* VideoViewController.h */,
+				4276A01C20F8339E00000DEE /* VideoViewController.m */,
+				42A5D14A20A0197F00566691 /* VideoPlayerViewController.h */,
+				4276A01920F8337500000DEE /* VideoPlayerViewController.m */,
 				42A5D15920A3E23800566691 /* TestMoviePlayerViewController.h */,
 				42A5D15A20A3E23800566691 /* TestMoviePlayerViewController.m */,
 				42A5D15620A3DE0E00566691 /* FOFMoviePlayerView.h */,
@@ -239,6 +244,7 @@
 			files = (
 				42A734CE20F597BE0079E862 /* FOFMoviePlayer.m in Sources */,
 				42A734D720F5E99C0079E862 /* Line.m in Sources */,
+				4276A01A20F8337600000DEE /* VideoPlayerViewController.m in Sources */,
 				42A734CB20F596270079E862 /* VideoEditViewController.m in Sources */,
 				422E489920C91EB700455D77 /* ConvertUtil.m in Sources */,
 				423ADBEC2099809D008A3846 /* ViewController.m in Sources */,
@@ -246,8 +252,8 @@
 				42A5D15C20A3E23800566691 /* TestMoviePlayerViewController.m in Sources */,
 				42A734D120F5D2EF0079E862 /* VideoPieces.m in Sources */,
 				42A5D15820A3DE0E00566691 /* FOFMoviePlayerView.m in Sources */,
-				42A5D14C20A0197F00566691 /* VideoViewController.m in Sources */,
 				423ADBE92099809D008A3846 /* AppDelegate.m in Sources */,
+				4276A01D20F8339E00000DEE /* VideoViewController.m in Sources */,
 				42A734D420F5D8940079E862 /* Haft.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

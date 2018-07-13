@@ -85,6 +85,14 @@
                                     <segue destination="v1z-Iv-akq" kind="show" id="tNb-I9-nso"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Piz-72-zDp">
+                                <rect key="frame" x="142" y="507" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="视频学习"/>
+                                <connections>
+                                    <segue destination="Q5Q-I0-rWF" kind="show" id="NrX-Sb-6m9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -98,12 +106,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1079.2" y="133.5832083958021"/>
+            <point key="canvasLocation" x="836" y="134"/>
         </scene>
-        <!--Video View Controller-->
+        <!--Video Player View Controller-->
         <scene sceneID="PLB-7b-JOZ">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mvI-MR-wsu" customClass="VideoViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mvI-MR-wsu" customClass="VideoPlayerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KN0-KU-e8a"/>
                         <viewControllerLayoutGuide type="bottom" id="ec4-qd-2AL"/>
@@ -171,6 +179,14 @@
                                     <segment title="X2"/>
                                 </segments>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WBz-J7-GCG">
+                                <rect key="frame" x="138" y="357" width="85" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="生成图片"/>
+                                <connections>
+                                    <action selector="actionGeneratePics:" destination="mvI-MR-wsu" eventType="touchUpInside" id="IeF-Hr-LT7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -193,7 +209,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oGO-zT-qjI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2134" y="188"/>
+            <point key="canvasLocation" x="3207" y="124"/>
+        </scene>
+        <!--Video View Controller-->
+        <scene sceneID="n0S-rk-QZF">
+            <objects>
+                <viewController id="Q5Q-I0-rWF" customClass="VideoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Iya-tq-oyc"/>
+                        <viewControllerLayoutGuide type="bottom" id="8Jz-Fd-6hW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZyC-Bd-ozW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c1Y-Qk-6di" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1367" y="943"/>
         </scene>
         <!--Video Edit View Controller-->
         <scene sceneID="Xxg-o8-MaC">
@@ -211,7 +245,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8F-PE-3Xu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1593" y="835"/>
+            <point key="canvasLocation" x="2087" y="475"/>
         </scene>
         <!--Test Movie Player View Controller-->
         <scene sceneID="1Xl-zu-gFD">

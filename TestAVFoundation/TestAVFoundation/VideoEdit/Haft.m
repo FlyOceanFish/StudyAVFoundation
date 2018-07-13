@@ -32,7 +32,7 @@
     NSLog(@"Move");
     UITouch *touch = touches.anyObject;
     CGPoint point = [touch locationInView:self.superview];
-    float maxX = CGRectGetWidth(self.superview.bounds)-CGRectGetWidth(self.bounds);
+    CGFloat maxX = CGRectGetWidth(self.superview.bounds)-CGRectGetWidth(self.bounds);
     if (point.x>maxX) {
         point.x = maxX;
     }
@@ -41,18 +41,18 @@
     }
 }
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    if (self.blockEnd) {
-        self.blockEnd();
+    if (self.blockMoveEnd) {
+        self.blockMoveEnd();
     }
 }
 - (void)drawRect:(CGRect)rect {
     
-    float width = CGRectGetWidth(self.bounds);
-    float height = CGRectGetHeight(self.bounds);
-    float lineWidth = 1.5;
-    float lineHeight = 12;
-    float gap = (width-lineWidth*2)/3.0;
-    float lineY = (height-lineHeight)/2.0;
+    CGFloat width = CGRectGetWidth(self.bounds);
+    CGFloat height = CGRectGetHeight(self.bounds);
+    CGFloat lineWidth = 1.5;
+    CGFloat lineHeight = 12;
+    CGFloat gap = (width-lineWidth*2)/3.0;
+    CGFloat lineY = (height-lineHeight)/2.0;
     
     CGContextRef context  = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, lineWidth);

@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 typedef void(^BlockMove)(CGPoint point);
-typedef void(^BlockEnd)(void);
+typedef void(^BlockMoveEnd)(void);
 @interface Haft : UIView
 @property (nonatomic,copy)BlockMove blockMove;
-@property (nonatomic,copy)BlockEnd blockEnd;
+@property (nonatomic,copy)BlockMoveEnd blockMoveEnd;
 /**
  增加左边的相应区域
  */
