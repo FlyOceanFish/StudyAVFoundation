@@ -211,17 +211,17 @@
         <!--Video View Controller-->
         <scene sceneID="n0S-rk-QZF">
             <objects>
-                <viewController id="Q5Q-I0-rWF" customClass="VideoViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Q5Q-I0-rWF" customClass="VideoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Iya-tq-oyc"/>
                         <viewControllerLayoutGuide type="bottom" id="8Jz-Fd-6hW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZyC-Bd-ozW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" tag="200" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7I-ew-ndI">
-                                <rect key="frame" x="113" y="111" width="126" height="30"/>
+                                <rect key="frame" x="124" y="45" width="126" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="视频编辑"/>
                                 <connections>
@@ -231,6 +231,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c1Y-Qk-6di" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
