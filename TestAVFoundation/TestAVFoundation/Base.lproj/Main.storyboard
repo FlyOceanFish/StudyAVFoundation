@@ -85,19 +85,16 @@
                                     <segue destination="v1z-Iv-akq" kind="show" id="tNb-I9-nso"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Piz-72-zDp">
-                                <rect key="frame" x="142" y="507" width="62" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="视频学习"/>
-                                <connections>
-                                    <segue destination="Q5Q-I0-rWF" kind="show" id="NrX-Sb-6m9"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="音频" id="n0n-km-zbE">
-                        <barButtonItem key="rightBarButtonItem" title="视频学习" id="uBe-oz-yeZ">
+                        <barButtonItem key="leftBarButtonItem" title="视频学习" id="pSb-tm-n8U">
+                            <connections>
+                                <segue destination="Q5Q-I0-rWF" kind="show" id="DH5-Lr-AfR"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="视频播放器学习" id="uBe-oz-yeZ">
                             <connections>
                                 <segue destination="mvI-MR-wsu" kind="show" id="18P-x5-YlI"/>
                             </connections>
@@ -222,12 +219,22 @@
                     <view key="view" contentMode="scaleToFill" id="ZyC-Bd-ozW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" tag="200" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7I-ew-ndI">
+                                <rect key="frame" x="113" y="111" width="126" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="视频编辑"/>
+                                <connections>
+                                    <action selector="actionClick:" destination="Q5Q-I0-rWF" eventType="touchUpInside" id="IWX-qH-EY9"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c1Y-Qk-6di" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1367" y="943"/>
+            <point key="canvasLocation" x="1221.5999999999999" y="-592.35382308845578"/>
         </scene>
         <!--Video Edit View Controller-->
         <scene sceneID="Xxg-o8-MaC">
