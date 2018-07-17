@@ -116,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				42A734C820F595DC0079E862 /* VideoEdit */,
+				427D0F5420FD800200A6AFE7 /* FOFMoviePlayerView */,
 				422E489A20C91ED300455D77 /* lame */,
 				423ADC012099A9EE008A3846 /* 男声.mp3 */,
 				423ADBFD2099A886008A3846 /* 女声.mp3 */,
@@ -134,8 +135,6 @@
 				4276A01920F8337500000DEE /* VideoPlayerViewController.m */,
 				42A5D15920A3E23800566691 /* TestMoviePlayerViewController.h */,
 				42A5D15A20A3E23800566691 /* TestMoviePlayerViewController.m */,
-				42A5D15620A3DE0E00566691 /* FOFMoviePlayerView.h */,
-				42A5D15720A3DE0E00566691 /* FOFMoviePlayerView.m */,
 				422E489720C91EB700455D77 /* ConvertUtil.h */,
 				422E489820C91EB700455D77 /* ConvertUtil.m */,
 				423ADBED2099809E008A3846 /* Main.storyboard */,
@@ -147,9 +146,28 @@
 			path = TestAVFoundation;
 			sourceTree = "<group>";
 		};
+		427D0F5320FD7FEC00A6AFE7 /* FOFMoviePlayer */ = {
+			isa = PBXGroup;
+			children = (
+				42A734CC20F597BE0079E862 /* FOFMoviePlayer.h */,
+				42A734CD20F597BE0079E862 /* FOFMoviePlayer.m */,
+			);
+			path = FOFMoviePlayer;
+			sourceTree = "<group>";
+		};
+		427D0F5420FD800200A6AFE7 /* FOFMoviePlayerView */ = {
+			isa = PBXGroup;
+			children = (
+				42A5D15620A3DE0E00566691 /* FOFMoviePlayerView.h */,
+				42A5D15720A3DE0E00566691 /* FOFMoviePlayerView.m */,
+			);
+			path = FOFMoviePlayerView;
+			sourceTree = "<group>";
+		};
 		42A734C820F595DC0079E862 /* VideoEdit */ = {
 			isa = PBXGroup;
 			children = (
+				427D0F5320FD7FEC00A6AFE7 /* FOFMoviePlayer */,
 				42A734C920F596270079E862 /* VideoEditViewController.h */,
 				42A734CA20F596270079E862 /* VideoEditViewController.m */,
 				42A734CF20F5D2EF0079E862 /* VideoPieces.h */,
@@ -158,8 +176,6 @@
 				42A734D320F5D8940079E862 /* Haft.m */,
 				42A734D520F5E99C0079E862 /* Line.h */,
 				42A734D620F5E99C0079E862 /* Line.m */,
-				42A734CC20F597BE0079E862 /* FOFMoviePlayer.h */,
-				42A734CD20F597BE0079E862 /* FOFMoviePlayer.m */,
 			);
 			path = VideoEdit;
 			sourceTree = "<group>";
