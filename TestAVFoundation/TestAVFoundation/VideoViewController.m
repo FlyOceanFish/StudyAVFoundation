@@ -43,6 +43,7 @@
     AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:path]];
     AVMutableComposition *composition = [AVMutableComposition composition];
     AVMutableCompositionTrack  *compositionTrack = [composition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    [compositionTrack ]
     NSError *error = nil;
     
     NSArray *tracks = asset.tracks;
@@ -71,7 +72,7 @@
      Web/CD-ROM：15
      其他视频类型，非丢帧视频，E-D动画 30
      */
-    videoComposition.frameDuration = CMTimeMake(1, 43);//必须设置，否则会奔溃
+    videoComposition.frameDuration = CMTimeMake(1, 43);//必须设置，否则会奔溃，一般30就够了
 //    videoComposition.renderScale
     videoComposition.instructions = [NSArray arrayWithObject:videoCompositionInstrution];
     

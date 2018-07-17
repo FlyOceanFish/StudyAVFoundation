@@ -138,6 +138,7 @@
     NSError *error = nil;
     
     self.recorder = [[AVAudioRecorder alloc] initWithURL:_url settings:dicM error:&error];
+//    [self.recorder recordForDuration:10];//能够精确控制要录制多少秒。时间到了则会自动停止
     if (error) {
         NSLog(@"%@",error.description);
     }
