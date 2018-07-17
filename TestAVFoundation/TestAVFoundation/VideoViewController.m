@@ -43,7 +43,6 @@
     AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:path]];
     AVMutableComposition *composition = [AVMutableComposition composition];
     AVMutableCompositionTrack  *compositionTrack = [composition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
-    [compositionTrack ]
     NSError *error = nil;
     
     NSArray *tracks = asset.tracks;
