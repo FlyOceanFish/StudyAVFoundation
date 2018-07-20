@@ -13,6 +13,7 @@
 {
     NSString *_videoPath;
     NSString *_newVideoPath;
+    NSMutableArray *_imagesArray;
 }
 @property (nonatomic,strong)FOFMoviePlayer *moviePlayer;
 
@@ -25,13 +26,18 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.title = @"视频编辑学习";
     _videoPath = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
+    _imagesArray = [NSMutableArray arrayWithCapacity:31];
+    for (int i  = 1; i<32; i++) {
+        [_imagesArray addObject:[UIImage imageNamed:[NSString stringWithFormat:@"%d.jpg",i]]];
+    }
 }
 - (IBAction)actionClick:(UIButton *)sender {
     switch (sender.tag) {
         case 200:
             [self videoCut:_videoPath];
             break;
-            
+        case 201://图片合成视频
+            [self picturesToVideo];
         default:
             break;
     }
@@ -147,6 +153,113 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+/**
+ 图片合成视频，如果图片质量较高的话，需要压缩后才合成，这里有没有进行压缩
+ */
+- (void)picturesToVideo{
+    NSError *outError;
+    NSURL *outputURL = [NSURL fileURLWithPath:[self pathForVideo:@"videoFromPics"]];
+    AVAssetWriter *assetWriter = [AVAssetWriter assetWriterWithURL:outputURL
+                                                          fileType:AVFileTypeQuickTimeMovie
+                                                             error:&outError];
+    BOOL success = (assetWriter != nil);
+    if (success) {
+        //写入视频大小
+        NSInteger numPixels = 320 * 480;
+        //每像素比特
+        CGFloat bitsPerPixel = 6;
+        NSInteger bitsPerSecond = numPixels * bitsPerPixel;
+        
+        // 码率和帧率设置,这个能够很好的压缩视频，否则导出来的视频比较大
+        NSDictionary *compressionProperties = @{ AVVideoAverageBitRateKey : @(bitsPerSecond),//视频码率就是数据传输时单位时间传送的数据位数，一般我们用的单位是kbps即千位每秒。通俗一点的理解就是取样率，单位时间内取样率越大，精度就越高，处理出来的文件就越接近原始文件。
+                                                 AVVideoExpectedSourceFrameRateKey : @(30),
+                                                 AVVideoMaxKeyFrameIntervalKey : @(30),
+                                                 AVVideoProfileLevelKey : AVVideoProfileLevelH264BaselineAutoLevel
+                                                 };
+        
+        CGSize size =CGSizeMake(320,480);
+        NSDictionary *videoSetting = @{AVVideoWidthKey:@(size.width),
+                                       AVVideoHeightKey:@(size.height),
+                                       AVVideoCodecKey:AVVideoCodecH264,
+                                       AVVideoScalingModeKey:AVVideoScalingModeResizeAspectFill,
+                                       AVVideoCompressionPropertiesKey:compressionProperties
+                                       };
+        
+        AVAssetWriterInput *assetWriterInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:videoSetting];
+        
+        NSDictionary*sourcePixelBufferAttributesDictionary =[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:kCVPixelFormatType_32ARGB],kCVPixelBufferPixelFormatTypeKey,nil];
+        //    AVAssetWriterInputPixelBufferAdaptor提供CVPixelBufferPool实例,
+        //    可以使用分配像素缓冲区写入输出文件。使用提供的像素为缓冲池分配通常
+        //    是更有效的比添加像素缓冲区分配使用一个单独的池
+        AVAssetWriterInputPixelBufferAdaptor *adaptor =[AVAssetWriterInputPixelBufferAdaptor assetWriterInputPixelBufferAdaptorWithAssetWriterInput:assetWriterInput sourcePixelBufferAttributes:sourcePixelBufferAttributesDictionary];
+        
+        if ([assetWriter canAddInput:assetWriterInput])
+            [assetWriter addInput:assetWriterInput];
+        
+        [assetWriter startWriting];
+        
+        [assetWriter startSessionAtSourceTime:kCMTimeZero];
+        
+        dispatch_queue_t myInputSerialQueue =dispatch_queue_create("mediaInputQueue",NULL);
+        
+        __block int frame = 0;
+        [assetWriterInput requestMediaDataWhenReadyOnQueue:myInputSerialQueue usingBlock:^{
+            while ([assetWriterInput isReadyForMoreMediaData])
+            {
+                ++frame;
+                if(frame >=[_imagesArray count])
+                {
+                    [assetWriterInput markAsFinished];
+                    [assetWriter finishWritingWithCompletionHandler:^{
+                        NSLog(@"合成完成!!");
+                    }];
+                    break;
+                }
+                
+                CVPixelBufferRef nextBuffer = [self pixelBufferFromCGImage:[_imagesArray[frame] CGImage] size:size];
+                
+                if (nextBuffer)
+                {
+                    [adaptor appendPixelBuffer:nextBuffer withPresentationTime:CMTimeMake(frame,1)];
+                    CFRelease(nextBuffer);
+                    nextBuffer = nil;
+                }
+            }
+        }];
+    }
+
+}
+- (CVPixelBufferRef)pixelBufferFromCGImage:(CGImageRef)image size:(CGSize)size
+{
+    NSDictionary *options =[NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSNumber numberWithBool:YES],kCVPixelBufferCGImageCompatibilityKey,
+                            [NSNumber numberWithBool:YES],kCVPixelBufferCGBitmapContextCompatibilityKey,nil];
+    CVPixelBufferRef pxbuffer =NULL;
+    CVReturn status =CVPixelBufferCreate(kCFAllocatorDefault,size.width,size.height,kCVPixelFormatType_32ARGB,(__bridge CFDictionaryRef) options,&pxbuffer);
+    
+    NSParameterAssert(status ==kCVReturnSuccess && pxbuffer !=NULL);
+    
+    CVPixelBufferLockBaseAddress(pxbuffer,0);
+    
+    void *pxdata =CVPixelBufferGetBaseAddress(pxbuffer);
+    
+    CGColorSpaceRef rgbColorSpace=CGColorSpaceCreateDeviceRGB();
+    //    当你调用这个函数的时候，Quartz创建一个位图绘制环境，也就是位图上下文。当你向上下文中绘制信息时，Quartz把你要绘制的信息作为位图数据绘制到指定的内存块。一个新的位图上下文的像素格式由三个参数决定：每个组件的位数，颜色空间，alpha选项
+    CGContextRef context =CGBitmapContextCreate(pxdata,size.width,size.height,8,4*size.width,rgbColorSpace,kCGImageAlphaPremultipliedFirst);
+    
+    //使用CGContextDrawImage绘制图片  这里设置不正确的话 会导致视频颠倒
+    //    当通过CGContextDrawImage绘制图片到一个context中时，如果传入的是UIImage的CGImageRef，因为UIKit和CG坐标系y轴相反，所以图片绘制将会上下颠倒
+    CGContextDrawImage(context,CGRectMake(0,0,CGImageGetWidth(image),CGImageGetHeight(image)), image);
+    // 释放色彩空间
+    CGColorSpaceRelease(rgbColorSpace);
+    // 释放context
+    CGContextRelease(context);
+    // 解锁pixel buffer
+    CVPixelBufferUnlockBaseAddress(pxbuffer,0);
+    
+    return pxbuffer;
 }
 
 /*

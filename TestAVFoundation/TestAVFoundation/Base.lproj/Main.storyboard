@@ -228,6 +228,14 @@
                                     <action selector="actionClick:" destination="Q5Q-I0-rWF" eventType="touchUpInside" id="IWX-qH-EY9"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" tag="201" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hep-jc-va1">
+                                <rect key="frame" x="132" y="94" width="126" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="图片合成视频"/>
+                                <connections>
+                                    <action selector="actionClick:" destination="Q5Q-I0-rWF" eventType="touchUpInside" id="xwS-Sd-r5x"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
