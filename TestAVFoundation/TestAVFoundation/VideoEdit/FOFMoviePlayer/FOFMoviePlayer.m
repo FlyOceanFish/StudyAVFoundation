@@ -44,12 +44,6 @@
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     self.playerLayer.videoGravity = AVLayerVideoGravityResize;
     [superLayer addSublayer:self.playerLayer];
-    __weak typeof(self) this = self;
-    [self.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(0.5, 1) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
-        if (fabs(CMTimeGetSeconds(time)-this.lastStartSeconds)<=0.02) {
-            [this private_playerMovieFinish];
-        }
-    }];
 }
 - (void)initLoopPlayers:(CALayer *)superLayer{
     self.player = [[AVQueuePlayer alloc] init];
@@ -134,7 +128,8 @@
     //    用于监听缓存足够播放的状态
     [_playItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(private_playerMovieFinish) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(private_playerMovieFinish) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    
     return _playItem;
 }
 - (void)private_playerMovieFinish{
