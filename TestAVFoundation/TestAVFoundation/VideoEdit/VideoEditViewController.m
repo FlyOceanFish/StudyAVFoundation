@@ -37,14 +37,13 @@
         this.totalSeconds = CMTimeGetSeconds(playItem.duration);
     }];
     
-//    [self.moviePlayer setBlockPlayToEndTime:^{
-//        [this private_replayAtBeginTime:this.lastStartSeconds];
-//    }];
-    
-    self.timeObserverToken = [self.moviePlayer.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(0.5, NSEC_PER_SEC) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+    [self.moviePlayer setBlockPlayToEndTime:^{
+        [this private_replayAtBeginTime:this.lastStartSeconds];
+    }];
+    //    如果对于时间精度要求比较小，可以适当增加timescale的值。这里是1.0/10 = 0.1;
+    self.timeObserverToken = [self.moviePlayer.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 10) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
         if (!this.seeking) {
-            if (fabs(CMTimeGetSeconds(time)-this.lastEndSeconds)<=0.02) {
-                    [this.moviePlayer fof_pause];
+            if (fabs(CMTimeGetSeconds(time)-this.lastEndSeconds)<=0.2) {
                     [this private_replayAtBeginTime:this.lastStartSeconds];
                 }
         }
