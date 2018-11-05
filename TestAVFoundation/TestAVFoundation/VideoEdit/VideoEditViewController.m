@@ -36,10 +36,11 @@
         [this.moviePlayer fof_play];
         this.totalSeconds = CMTimeGetSeconds(playItem.duration);
     }];
+    
     [self.moviePlayer setBlockPlayToEndTime:^{
         [this private_replayAtBeginTime:this.lastStartSeconds];
     }];
-
+    
     self.timeObserverToken = [self.moviePlayer.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(0.5, NSEC_PER_SEC) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
         if (!this.seeking) {
             if (fabs(CMTimeGetSeconds(time)-this.lastEndSeconds)<=0.02) {

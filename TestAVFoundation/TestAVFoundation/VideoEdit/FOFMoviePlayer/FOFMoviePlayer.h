@@ -26,6 +26,8 @@ typedef void(^BlockPlayToEndTime)(void);
 @property(nonatomic,copy)BlockPlaybackLikelyToKeepUp blockPlaybackLikelyToKeepUp;
 @property(nonatomic,copy)BlockPlayToEndTime blockPlayToEndTime;
 
+@property (nonatomic,assign)CGFloat lastStartSeconds;
+
 @property(nonatomic,strong,readonly)NSURL *url;
 
 @property(nonatomic,strong,readonly)AVPlayer *player;
